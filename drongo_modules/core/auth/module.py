@@ -1,8 +1,8 @@
 import logging
 
-from wing_database import Database
+from drongo_modules.core.database import Database
 
-from wing_module import Module
+from drongo_modules.core.module import Module
 
 from .validators import UsernameValidator, PasswordValidator
 
@@ -26,7 +26,7 @@ class Auth(Module):
         'password_validator': PasswordValidator
     }
 
-    logger = logging.getLogger('wing_auth')
+    logger = logging.getLogger('drongo_modules.core.auth')
 
     def init(self, config):
         self.logger.info('Initializing [auth] module.')

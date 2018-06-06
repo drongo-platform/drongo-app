@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from wing_database.utils.mongo_orm.document import Document
+from drongo_modules.core.database.utils.mongo_orm.document import Document
 
 
 class User(Document):

@@ -3,10 +3,10 @@ from drongo import Drongo
 
 class AuthApp(Drongo):
     def init(self):
-        from wing_auth import Auth
-        from wing_auth.middleware import AuthMiddleware
+        from drongo_modules.core.auth import Auth
+        from drongo_modules.core.auth.middleware import AuthMiddleware
 
-        from wing_database import Database
+        from drongo_modules.core.database import Database
 
         Database(
             self,

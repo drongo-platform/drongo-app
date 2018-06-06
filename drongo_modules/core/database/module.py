@@ -1,6 +1,6 @@
 import logging
 
-from wing_module import Module
+from drongo_modules.core.module import Module
 
 
 class Database(Module):
@@ -9,7 +9,7 @@ class Database(Module):
     MYSQL = 'mysql'
     REDIS = 'redis'
 
-    logger = logging.getLogger('wing_database')
+    logger = logging.getLogger('drongo_modules.core.database')
 
     def init(self, config):
         self.logger.info('Initializing [database] module.')

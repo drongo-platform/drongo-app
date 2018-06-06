@@ -1,6 +1,6 @@
 import logging
 
-from wing_module import Module
+from drongo_modules.core.module import Module
 
 from . import models
 

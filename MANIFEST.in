@@ -1,9 +1,7 @@
 graft drongo
 graft drongo_utils
-graft wing_module
-graft wing_database
-graft wing_auth
-graft wing_media
+graft drongo_modules
+graft nest
 
 global-exclude __pycache__
 global-exclude *.py[co]
