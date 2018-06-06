@@ -1,6 +1,5 @@
 import argparse
 import importlib
-import six
 
 from nest import Nest
 
@@ -36,3 +35,7 @@ def main():
     except KeyboardInterrupt:
         print('Exiting...')
         nest.shutdown()
+
+
+if __name__ == '__main__':
+    main()
