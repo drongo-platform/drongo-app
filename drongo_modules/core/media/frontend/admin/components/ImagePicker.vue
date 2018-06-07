@@ -23,7 +23,7 @@
       </div>
       <div class="image-browser__upload">
         <form class="form" method="post" @submit.stop.prevent="uploadMedia">
-          <d-dropzone-file-field @change="uploadFileChanged"></d-dropzone-file-field>
+          <d-admin-form-dropzonefile @change="uploadFileChanged"></d-admin-form-dropzonefile>
         </form>
       </div>
       <div class="image-browser__buttons">
