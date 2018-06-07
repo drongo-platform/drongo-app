@@ -1,10 +1,11 @@
 <template>
-  <div class="">
+  <div class="form__control">
+    <label>{{ label }}</label><br />
     <img class="preview" :src="this.value" />
     <input type="text" :value="value" readonly />
-    <a href="#" @click.prevent="state.browserVisible = true" class="button button--primary">Browse</a>
+    <a href="#" @click.prevent="state.browserVisible = true" class="button button--primary"><i class="icon-list"></i> Browse</a>
     &nbsp;
-    <a href="#" @click.prevent="clear">clear</a>
+    <a href="#" @click.prevent="clear"><i class="icon-close"></i> clear</a>
 
     <div class="image-browser" :class="{'image-browser--show': state.browserVisible}">
       <div class="media-items">
@@ -37,7 +38,7 @@
   import mediaService from '~media/service'
 
   export default {
-    props: ['value', 'container'],
+    props: ['label', 'value', 'container'],
 
     methods: {
       loadImageList () {
