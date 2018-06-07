@@ -80,8 +80,8 @@ class Document(object):
                 raise ValueError
             self._data[fld] = value._id
             self._changed[name] = value._id
-        else:
-            raise AttributeError
+        # else:
+        #     raise AttributeError
 
     def __repr__(self):
         return '%s(**%s)' % (self.__class__.__name__, repr(self._data))
