@@ -4,6 +4,7 @@ from drongo_modules.core.database import Database
 
 from drongo_modules.core.module import Module
 
+from .middleware import AuthMiddleware
 from .validators import UsernameValidator, PasswordValidator
 
 
@@ -55,6 +56,7 @@ class Auth(Module):
             except Exception as e:
                 self.logger.info(str(e))
 
+        self.app.add_middleware(AuthMiddleware())
         self.init_api()
 
     def init_api(self):
