@@ -103,6 +103,7 @@
 
     &--show {
       display: block;
+      z-index: 999;
     }
 
     &__buttons {
