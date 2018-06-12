@@ -1,7 +1,7 @@
 <template>
   <div class="auth-info" v-if="$store.state.auth.authenticated">
-    Hello {{ $store.state.auth.username }},
-    <a href="#" @click.prevent="logout">Logout</a>
+    Hello <nuxt-link to="/auth/me">{{ $store.state.auth.username }}</nuxt-link>,
+    <a href="#" @click.prevent="logout"><i class="icon-logout"></i></a>
   </div>
   <div class="username" v-else>
     <nuxt-link to="/auth/login">Login</nuxt-link>

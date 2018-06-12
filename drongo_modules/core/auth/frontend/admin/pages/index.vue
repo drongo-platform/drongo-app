@@ -2,7 +2,7 @@
   <div class="page">
     <h2 class="page__title">
       <i class="icon-lock"></i>
-      Authentication &amp; Authorization
+      Auth
     </h2>
 
     <div class="panel">
