@@ -10,25 +10,27 @@ NEST = shutil.which('drongo-nest')
 
 def run_dev():
     os.environ['DRONGO_SETTINGS_FILE'] = os.path.realpath(sys.argv[1])
-    app = subprocess.Popen(
-        ['python', '-m', 'nest.cmd', 'drongo_app.app:app', '--auto-reload'])
+    from nest import Nest
+    from drongo_app.app import app
 
+    server = Nest(app=app, auto_reload=True)
     try:
-        app.wait()
+        server.run()
     except KeyboardInterrupt:
         print('Terminating...')
-        app.terminate()
-        app.wait()
+        server.shutdown()
 
 
 def run():
     os.environ['DRONGO_SETTINGS_FILE'] = os.path.realpath(sys.argv[1])
-    app = subprocess.Popen(
-        ['python', '-m', 'nest.cmd', 'drongo_app.app:app'])
+    server = Nest(app=app)
 
     try:
-        app.wait()
+        server.run()
     except KeyboardInterrupt:
         print('Terminating...')
-        app.terminate()
-        app.wait()
+        server.shutdown()
+
+
+if __name__ == '__main__':
+    run()
