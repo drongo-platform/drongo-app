@@ -13,7 +13,6 @@ from ... import models
 
 class MediaServiceBase(object):
     FS_DIR = None
-    SERVER_URL = None
     AGE = 3600 * 12
 
     ENABLE_TINYPNG = False
@@ -24,8 +23,6 @@ class MediaServiceBase(object):
         cls.FS_DIR = config.get('fs_dir')
         if not os.path.exists(cls.FS_DIR):
             os.makedirs(cls.FS_DIR)
-
-        cls.SERVER_URL = config.get('server_url')
 
         cls.ENABLE_TINYPNG = config.get('enable_tinypng')
         cls.TINYPNG_KEY = config.get('tinypng_key')
@@ -222,8 +219,8 @@ class SaveMediaInfo(MediaServiceBase):
         models.MediaFile.create(
             container=self.container,
             key=self.key,
-            url='{server_url}/{container}/{key}'.format(
-                server_url=self.SERVER_URL, container=self.container, key=self.key
+            url='/{container}/{key}'.format(
+                container=self.container, key=self.key
             ),
             uploaded_on=datetime.utcnow(),
             mimetype=self.mimetype,

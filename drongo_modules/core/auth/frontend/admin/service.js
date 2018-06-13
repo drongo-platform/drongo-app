@@ -29,5 +29,17 @@ export default {
         reject(err)
       })
     })
+  },
+
+  list () {
+    return new Promise((resolve, reject) => {
+      axios.get(
+        `${process.env.apiUrl}/auth/users`
+      ).then((resp) => {
+        resolve(resp.data.payload)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
   }
 }

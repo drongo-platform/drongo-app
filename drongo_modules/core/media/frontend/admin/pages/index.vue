@@ -60,8 +60,8 @@
               <div class="media-items__item-wrap" v-for="item in mediaItems">
                 <div class="media-items__item">
                   <div class="media-items__image-wrap" v-if="item.mimetype.startsWith('image/')">
-                    <div class="media-items__image" :style="{'background-image': `url('${item.url}')`}">
-                      <img :src="item.url" />
+                    <div class="media-items__image" :style="{'background-image': `url('${getMediaUrl(item.url)}')`}">
+                      <img :src="`${item.url}`" />
                     </div>
                   </div>
                   <div class="media-items__actions">
@@ -164,6 +164,10 @@
         }).then((resp) => {
           this.loadMedia()
         })
+      },
+
+      getMediaUrl (url) {
+        return process.env.apiUrl + '/media' + url
       }
     },
 

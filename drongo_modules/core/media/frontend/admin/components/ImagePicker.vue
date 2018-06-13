@@ -1,7 +1,7 @@
 <template>
   <div class="form__control">
     <label>{{ label }}</label><br />
-    <img class="preview" :src="this.value" />
+    <img class="preview" :src="mediaUrl" />
     <input type="text" :value="value" readonly />
     <a href="#" @click.prevent="state.browserVisible = true" class="button button--primary"><i class="icon-list"></i> Browse</a>
     &nbsp;
@@ -12,8 +12,8 @@
         <div class="media-items__item-wrap" v-for="image in images">
           <div class="media-items__item" v-if="image.mimetype.startsWith('image')">
             <div class="media-items__image-wrap" v-if="image.mimetype.startsWith('image/')">
-              <div class="media-items__image" :style="{'background-image': `url('${image.url}')`}">
-                <img :src="image.url" />
+              <div class="media-items__image" :style="{'background-image': `url('${getMediaUrl(image.url)}')`}">
+                <img :src="getMediaUrl(image.url)" />
               </div>
             </div>
             <div class="media-items__actions">
@@ -40,6 +40,12 @@
   export default {
     props: ['label', 'value', 'container'],
 
+    computed: {
+      mediaUrl () {
+        return this.getMediaUrl(this.value)
+      }
+    },
+
     methods: {
       loadImageList () {
         mediaService.admin.media.list({container: this.container}).then((resp) => {
@@ -63,6 +69,10 @@
         }).then((resp) => {
           this.loadImageList()
         })
+      },
+
+      getMediaUrl (url) {
+        return process.env.apiUrl + '/media' + url
       }
     },
 
@@ -169,5 +179,4 @@
       }
     }
   }
-
 </style>
