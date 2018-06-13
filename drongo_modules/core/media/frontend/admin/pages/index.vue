@@ -178,7 +178,7 @@
 </script>
 
 <style lang="scss">
-  @import '~assets/site/_variables';
+  @import '~assets/variables';
 
   .media-items {
     display: flex;

@@ -93,7 +93,7 @@
 </script>
 
 <style lang="scss">
-  @import '~assets/site/_variables';
+  @import '~assets/variables';
 
   img.preview {
     margin: 0 auto;
