@@ -20,7 +20,7 @@ class Media(Module):
         'tinypng_key': None
     }
 
-    logger = logging.getLogger('wing_media')
+    logger = logging.getLogger('drongo_modules.core.media')
 
     def init(self, config):
         self.logger.info('Initializing [media] module.')
