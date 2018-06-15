@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+import uaxios from '~/utils/axios'
+const handleAxios = uaxios.handle
+
 export default {
   login ({username, password}) {
     return new Promise((resolve, reject) => {
@@ -41,5 +44,14 @@ export default {
         reject(err)
       })
     })
+  },
+
+  changePassword ({username, password, newPassword}) {
+    return handleAxios(
+      axios.post(
+        `${process.env.apiUrl}/auth/users/operations/change-password`,
+        {username, password, new_password: newPassword}
+      )
+    )
   }
 }
