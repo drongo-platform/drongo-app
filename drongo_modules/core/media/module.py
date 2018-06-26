@@ -48,3 +48,9 @@ class Media(Module):
             module=self,
             base_url=self.config.base_url
         )
+
+    def save_media(self, container, uploaded_file):
+        return self.services.SaveMediaService(
+            container=self.container,
+            uploaded_file=uploaded_file
+        ).call()
