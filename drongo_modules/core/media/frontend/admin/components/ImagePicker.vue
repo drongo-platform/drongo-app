@@ -3,9 +3,10 @@
     <label>{{ label }}</label><br />
     <img class="preview" :src="mediaUrl" />
     <input type="text" :value="value" readonly />
-    <a href="#" @click.prevent="state.browserVisible = true" class="button button--primary"><i class="icon-list"></i> Browse</a>
-    &nbsp;
-    <a href="#" @click.prevent="clear"><i class="icon-close"></i> clear</a>
+    <div class="button-group">
+      <a href="#" @click.prevent="state.browserVisible = true" class="button button--info button--small"><i class="icon-list"></i> Browse</a>
+      <a href="#" @click.prevent="clear" class="button button--small"><i class="icon-close"></i> Reset</a>
+    </div>
 
     <div class="image-browser" :class="{'image-browser--show': state.browserVisible}">
       <div class="media-items">
