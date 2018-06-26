@@ -46,6 +46,7 @@ class TestAuthAdmin(TestCase):
 
     def test_group_user_management(self):
         self.auth_client.create_group('testgroup')
+        self.auth_client.delete_user_from_group('testgroup', 'admin')
         self.auth_client.add_user_to_group('testgroup', 'admin')
         self.assertEqual(
             self.auth_client.get_group_users('testgroup'), ['admin'])
@@ -55,3 +56,13 @@ class TestAuthAdmin(TestCase):
         self.assertEqual(
             self.auth_client.get_group_users('testgroup'), [])
         self.auth_client.delete_group('testgroup')
+
+    def test_duplicate_group(self):
+        self.auth_client.create_group('testgroup')
+        self.auth_client.create_group('testgroup')
+        self.auth_client.delete_group('testgroup')
+
+    def test_user_action_non_existant_group(self):
+        self.auth_client.get_group_users('testgroupa')
+        self.auth_client.add_user_to_group('testgroupa', 'admin')
+        self.auth_client.delete_user_from_group('testgroupa', 'admin')
