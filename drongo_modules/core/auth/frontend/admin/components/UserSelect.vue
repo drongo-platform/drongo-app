@@ -1,7 +1,7 @@
 <template>
   <div class="form__control">
     <label>{{ label }}</label>
-    <select>
+    <select :value="value" @input="updateValue($event.target.value)">
       <option value="">None</option>
       <option v-for="user in userList" :value="user.username" :key="user.username">{{ user.username }}</option>
     </select>
@@ -19,6 +19,10 @@
         authService.list().then((res) => {
           this.userList = res
         })
+      },
+
+      updateValue (newVal) {
+        this.$emit('input', newVal)
       }
     },
 
