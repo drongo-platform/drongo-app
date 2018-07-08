@@ -92,3 +92,49 @@ class BasicDrongoTest(unittest.TestCase):
 
         resp = self.app(sample_env, self.start_response)
         self.assertIn(b'World, Hello!', resp)
+
+    def test_middleware_basic(self):
+        class Middleware(object):
+            def before(slf, ctx):
+                self.before_called = True
+
+            def after(slf, ctx):
+                self.after_called = True
+
+        self.app.add_middleware(Middleware())
+
+        def sample(ctx):
+            return 'Hello, World!'
+
+        self.app.add_url('/', 'GET', sample)
+
+        sample_env = dict(
+            REQUEST_METHOD='GET',
+            GET='',
+            PATH_INFO='/'
+        )
+
+        self.app(sample_env, self.start_response)
+        self.assertTrue(self.before_called)
+        self.assertTrue(self.after_called)
+
+    def test_middleware_exception(self):
+        class Middleware(object):
+            def exception(slf, ctx, exc):
+                self.exception_called = True
+
+        self.app.add_middleware(Middleware())
+
+        def sample(ctx):
+            raise Exception('Bug')
+
+        self.app.add_url('/', 'GET', sample)
+
+        sample_env = dict(
+            REQUEST_METHOD='GET',
+            GET='',
+            PATH_INFO='/'
+        )
+
+        self.app(sample_env, self.start_response)
+        self.assertTrue(self.exception_called)
