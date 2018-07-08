@@ -82,8 +82,8 @@ class UrlManager(object):
         result = None
         for key in node:
             if key == remaining[0]:
-                result = self._recursive_route_match(node[key], remaining[1:],
-                                                     method, args)
+                result = self._recursive_route_match(
+                    node[key], remaining[1:], method, args)
                 if result:
                     return result
             elif len(key) and key[0] == '{':
@@ -104,8 +104,8 @@ class UrlManager(object):
 
         for key in node:
             if key == '*':
-                result = self._recursive_route_match(node[key][''], [], method,
-                                                     args)
+                result = self._recursive_route_match(
+                    node[key][''], [], method, args)
                 if result:
                     return result
 

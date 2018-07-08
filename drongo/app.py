@@ -83,37 +83,6 @@ class Drongo(object):
             status=response._status_code))
         return response.bake(start_response)
 
-    def url(self, pattern, method=None, name=None):
-        """Decorator to map url pattern to the callable.
-
-        Args:
-            pattern (:obj:`str`): URL pattern to add. This is usually '/'
-                separated path. Parts of the URL can be parameterised using
-                curly braces.
-                Examples: "/", "/path/to/resource", "/resoures/{param}"
-            method (:obj:`str`, :obj:`list` of :obj:`str`, optional): HTTP
-                methods for the path specied. By default, GET method is added.
-                Value can be either a single method, by passing a string, or
-                multiple methods, by passing a list of strings.
-            name (:obj:`str`): Name for the pattern that can be used for
-                reverse matching
-
-        Note:
-            A trailing '/' is always assumed in the pattern.
-
-        Example:
-            >>> @app.url(pattern='/path/to/resource', method='GET')
-            >>> def function(ctx):
-            >>>     return 'Hello world'
-
-        See Also:
-            :func:`drongo.managers.url.UrlManager.add`
-        """
-        def _inner(call):
-            self._url_manager.add(pattern, method, call, name)
-            return call
-        return _inner
-
     def add_url(self, pattern, method=None, call=None):
         """Add a url pattern.
 
