@@ -138,3 +138,18 @@ class BasicDrongoTest(unittest.TestCase):
 
         self.app(sample_env, self.start_response)
         self.assertTrue(self.exception_called)
+
+    def test_arg(self):
+        sample_env = dict(
+            REQUEST_METHOD='GET',
+            GET='',
+            PATH_INFO='/hello'
+        )
+
+        def sample(ctx, arg):
+            return arg
+
+        self.app.add_url('/{arg}', 'GET', sample)
+
+        resp = self.app(sample_env, self.start_response)
+        self.assertIn(b'hello', resp)
