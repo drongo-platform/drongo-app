@@ -51,3 +51,44 @@ class BasicDrongoTest(unittest.TestCase):
 
         self.app(sample_env, self.start_response)
         self.assertIn('500', self.status_code)
+
+    def test_match_by_method(self):
+        def sample1(ctx):
+            return 'Hello, World!'
+
+
+        def sample2(ctx):
+            return 'World, Hello!'
+
+        self.app.add_url('/', 'GET', sample1)
+        self.app.add_url('/', 'POST', sample2)
+
+        sample_env = dict(
+            REQUEST_METHOD='GET',
+            GET='',
+            PATH_INFO='/'
+        )
+
+        resp = self.app(sample_env, self.start_response)
+        self.assertIn(b'Hello, World!', resp)
+
+        self.app.add_url('/', None, sample1)
+        self.app.add_url('/test', ['POST', 'PUT'], sample2)
+
+        sample_env = dict(
+            REQUEST_METHOD='POST',
+            GET='',
+            PATH_INFO='/test'
+        )
+
+        resp = self.app(sample_env, self.start_response)
+        self.assertIn(b'World, Hello!', resp)
+
+        sample_env = dict(
+            REQUEST_METHOD='PUT',
+            GET='',
+            PATH_INFO='/test'
+        )
+
+        resp = self.app(sample_env, self.start_response)
+        self.assertIn(b'World, Hello!', resp)
