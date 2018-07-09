@@ -154,6 +154,10 @@ class AsyncHandler(object):
                 env['CLIENT_PORT'] = self._port
 
                 yield from responder.respond(env)
+                if 'HTTP_CONNECTION' not in env or \
+                        env['HTTP_CONNECTION'].lower() != 'keep-alive':
+                    writer.close()
+
                 timer_end = time.time()
                 self._logger.info('Executed in [{time:0.3f} ms]'.format(
                     time=(timer_end - timer_start) * 1000
