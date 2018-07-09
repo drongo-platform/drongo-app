@@ -33,6 +33,10 @@ class IOWrapper(object):
         self.byte_count += len(a[0])
         return self._real.write(*a, **kw)
 
+    @asyncio.coroutine
+    def drain(self):
+        return (yield from self._real.drain())
+
 
 class ConnectionWrapper(object):
     __slots__ = ['_reader', '_writer', '_peer']
@@ -80,7 +84,7 @@ class Reader(object):
             self.data += yield from self.reader.read(self.BUFFER_SIZE)
             if not self.data:
                 return None
-            n = http_parser.feed(data, env)
+            n = http_parser.feed(self.data, env)
             self.data = self.data[n:]
         return env
 
