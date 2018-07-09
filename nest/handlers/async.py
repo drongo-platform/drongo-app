@@ -64,22 +64,24 @@ class ConnectionWrapper(object):
 
 
 class Reader(object):
-    __slots__ = ['reader']
+    __slots__ = ['reader', 'data']
 
     BUFFER_SIZE = 102400  # 100kb
 
     def __init__(self, reader):
         self.reader = reader
+        self.data = b''
 
     @asyncio.coroutine
     def get_one(self):
         http_parser = HttpParser()
         env = dict()
         while not http_parser.complete:
-            data = yield from self.reader.read(self.BUFFER_SIZE)
-            if not data:
+            self.data += yield from self.reader.read(self.BUFFER_SIZE)
+            if not self.data:
                 return None
-            http_parser.feed(data, env)
+            n = http_parser.feed(data, env)
+            self.data = self.data[n:]
         return env
 
 
