@@ -104,6 +104,7 @@ class Responder(object):
         res = self.app(env, self.start_response)
         for data in res:
             self.writer.write(data)
+        yield from self.writer.drain()
 
 
 class AsyncHandler(object):

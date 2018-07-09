@@ -19,10 +19,10 @@ logging.basicConfig(format=fmt, level=logging.WARNING)
 app = Drongo()
 
 
-@app.url(pattern='/*', method='OPTIONS')
 def dummy(ctx):
     return ''
 
+app.add_url(pattern='/*', method='OPTIONS', call=dummy)
 
 app.add_middleware(CORSMiddleware())
 
