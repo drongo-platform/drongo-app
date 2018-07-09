@@ -153,3 +153,32 @@ class BasicDrongoTest(unittest.TestCase):
 
         resp = self.app(sample_env, self.start_response)
         self.assertIn(b'hello', resp)
+
+    def test_named(self):
+        sample_env = dict(
+            REQUEST_METHOD='GET',
+            GET='',
+            PATH_INFO='/'
+        )
+
+        def sample(ctx):
+            return 'Hello, World!'
+
+        self.app.add_url('/', 'GET', sample, 'root')
+        pattern = self.app.urls.find_pattern('root')
+        self.assertEqual(pattern, '/')
+
+    def test_match_all_url(self):
+        sample_env = dict(
+            REQUEST_METHOD='GET',
+            GET='',
+            PATH_INFO='/random/path/here'
+        )
+
+        def sample(ctx):
+            return 'Hello, World!'
+
+        self.app.add_url('/*', 'GET', sample)
+
+        self.app(sample_env, self.start_response)
+        self.assertIn('200', self.status_code)
