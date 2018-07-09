@@ -37,6 +37,15 @@ class BasicDrongoTest(unittest.TestCase):
         self.app(sample_env, self.start_response)
         self.assertIn('200', self.status_code)
 
+        sample_env = dict(
+            REQUEST_METHOD='POST',
+            GET='',
+            PATH_INFO='/'
+        )
+
+        self.app(sample_env, self.start_response)
+        self.assertIn('404', self.status_code)
+
     def test_exception_url(self):
         sample_env = dict(
             REQUEST_METHOD='GET',
@@ -161,10 +170,7 @@ class BasicDrongoTest(unittest.TestCase):
             PATH_INFO='/'
         )
 
-        def sample(ctx):
-            return 'Hello, World!'
-
-        self.app.add_url('/', 'GET', sample, 'root')
+        self.app.add_url('/', 'GET', lambda ctx: '', 'root')
         pattern = self.app.urls.find_pattern('root')
         self.assertEqual(pattern, '/')
 
