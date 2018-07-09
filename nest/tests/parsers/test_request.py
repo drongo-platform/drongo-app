@@ -9,7 +9,7 @@ class TestRequest(unittest.TestCase):
 
     def test_oneshot(self):
         env = dict()
-        n = self.parser.feed(b'GET / HTTP/1.1\r\n', env)
+        self.parser.feed(b'GET / HTTP/1.1\r\n', env)
         self.assertEqual(env['REQUEST_METHOD'], 'GET')
 
     def test_bytewisefeed(self):

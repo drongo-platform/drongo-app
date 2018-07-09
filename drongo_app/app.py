@@ -23,12 +23,6 @@ app = Drongo()
 def dummy(ctx):
     return ''
 
-#
-# @app.url(pattern='/upload', method='POST')
-# def upload(ctx):
-#     ctx.response.set_content('{"url": "http://localhost:8000/", "uploaded": true}')
-#     ctx.response.set_header('content-type', 'application/json')
-
 
 app.add_middleware(CORSMiddleware())
 

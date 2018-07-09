@@ -1,5 +1,3 @@
-import time
-
 from unittest import TestCase
 
 from bson.objectid import ObjectId

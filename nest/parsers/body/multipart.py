@@ -3,7 +3,7 @@ import ast
 from .utils import TempFile, ByteBuffer
 
 
-__all__ = ['BodyParser']
+__all__ = ['MultipartParser']
 
 
 class PartBoundaryParser(object):
@@ -201,7 +201,7 @@ class MultipartParser(object):
         self._part_parser = None
 
     def set_boundary_from_env(self, env):
-        self._boundary = boundary = b'--' + (
+        self._boundary = b'--' + (
             env['CONTENT_TYPE'].split('boundary=', 1)[1].split(';')[0]
             .strip().encode('ascii'))
         self._boundary_parser = PartBoundaryParser(self._boundary)

@@ -104,7 +104,8 @@ class AuthClient(object):
         return resp['status'] == 'OK'
 
     def get_group_users(self, group):
-        resp = self.client.get('/auth/groups/{group}/users'.format(group=group))
+        resp = self.client.get(
+            '/auth/groups/{group}/users'.format(group=group))
         if resp['status'] == 'OK':
             return resp['payload']
 
