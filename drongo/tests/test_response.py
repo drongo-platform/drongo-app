@@ -97,5 +97,5 @@ class TestRequest(unittest.TestCase):
         )
 
         resp = self.app(sample_env, self.start_response)
-        resp = json.loads(resp[0])
+        resp = json.loads(resp[0].decode('utf8'))
         self.assertEqual({'hello': 'world'}, resp)
