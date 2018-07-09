@@ -4,5 +4,5 @@
 * URL
 """
 
-from .middleware import MiddlewareManager
-from .url import UrlManager
+from .middleware import MiddlewareManager  # noqa: F401
+from .url import UrlManager  # noqa: F401

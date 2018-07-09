@@ -46,7 +46,7 @@ class HeaderParser(object):
                 v = v.strip()
                 env[k] = v
                 consumed_size += i + 2
-            except Exception as _:
+            except Exception:
                 return len(data)
 
         assert consumed_size > initial_size  # Safety check

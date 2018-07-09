@@ -25,7 +25,7 @@ class IOWrapper(object):
 
     @asyncio.coroutine
     def read(self, *a, **kw):
-        result = yield from self._real.read(*a, **kw)
+        result = yield from self._real.read(*a, **kw)  # noqa: E999
         self.byte_count += len(result)
         return result
 

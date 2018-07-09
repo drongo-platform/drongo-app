@@ -65,7 +65,7 @@ class PartHeaderParser(object):
                 v = v.strip()
                 env[k] = v
                 consumed_size += i + 2
-            except Exception as _:
+            except Exception:
                 return len(data)
 
         assert consumed_size > initial_size  # Safety check
@@ -109,7 +109,7 @@ class PartBodyParser(object):
             self._contents += self._buffer[:i]
             self.complete = True
             return i - initial_size + len(self._b)
-        except Exception as _:
+        except Exception:
             if len(self._buffer) > len(self._b):
                 si = len(self._buffer)-len(self._b)
                 self._contents += self._buffer[:si]

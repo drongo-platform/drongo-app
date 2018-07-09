@@ -25,7 +25,7 @@ class RequestParser(object):
         line = self._buffer[:idx]
         try:
             method, request, version = line.decode('ascii').split()
-        except Exception as _:
+        except Exception:
             raise Exception('Invalid request!')
 
         assert method in self.VALID_METHODS

@@ -85,7 +85,7 @@ class SyncHandler(object):
             if env:
                 responder = Responder(sock, self.app)
                 responder.respond(env)
-        except (EOFError, socket.error) as _:
+        except (EOFError, socket.error):
             # TODO: Log the error
             sock.close()
             self._client_readers.pop(sock)

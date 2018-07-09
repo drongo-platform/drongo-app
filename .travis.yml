@@ -17,6 +17,7 @@ install: "python setup.py install"
 script:
   - pip install -r requirements.txt
   - py.test --cov
-  - flake8
+  - flake8 drongo
+  - flake8 nest
 after_success:
   codecov

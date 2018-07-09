@@ -1,6 +1,5 @@
 import unittest
 
-
 from drongo import Drongo
 
 
@@ -64,7 +63,6 @@ class BasicDrongoTest(unittest.TestCase):
     def test_match_by_method(self):
         def sample1(ctx):
             return 'Hello, World!'
-
 
         def sample2(ctx):
             return 'World, Hello!'
