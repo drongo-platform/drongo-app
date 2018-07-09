@@ -97,6 +97,8 @@ class Drongo(object):
                 multiple methods, by passing a list of strings.
             call (callable): Callable corresponding to the url pattern and the
                 HTTP method specified.
+            name (:obj:`str`): Name for the pattern that can be used for
+                reverse matching
 
         Note:
             A trailing '/' is always assumed in the pattern.
