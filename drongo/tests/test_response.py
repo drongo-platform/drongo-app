@@ -58,11 +58,15 @@ class TestRequest(unittest.TestCase):
         )
 
         self.app(sample_env, self.start_response)
+        headers = list(map(
+            lambda a: (a[0].lower(), a[1].lower()),
+            self.headers
+        ))
         self.assertIn(
             (
                 'set-cookie',
-                'a=test; Domain=localhost; HttpOnly; Path=/; Secure'
-            ), self.headers)
+                'a=test; Domain=localhost; HttpOnly; Path=/; Secure'.lower()
+            ), headers)
 
     def test_redirect(self):
         def sample(ctx):
