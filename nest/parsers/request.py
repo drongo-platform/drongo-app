@@ -19,7 +19,7 @@ class RequestParser(object):
         self._buffer += data
         try:
             idx = self._buffer.index(b'\r\n')
-        except Exception as _:
+        except Exception:
             return len(data)
 
         line = self._buffer[:idx]

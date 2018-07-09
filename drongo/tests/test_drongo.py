@@ -162,12 +162,6 @@ class BasicDrongoTest(unittest.TestCase):
         self.assertIn(b'hello', resp)
 
     def test_named(self):
-        sample_env = dict(
-            REQUEST_METHOD='GET',
-            GET='',
-            PATH_INFO='/'
-        )
-
         self.app.add_url('/', 'GET', lambda ctx: '', 'root')
         pattern = self.app.urls.find_pattern('root')
         self.assertEqual(pattern, '/')
