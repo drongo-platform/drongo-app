@@ -83,7 +83,7 @@ class Drongo(object):
             status=response._status_code))
         return response.bake(start_response)
 
-    def add_url(self, pattern, method=None, call=None):
+    def add_url(self, pattern, method=None, call=None, name=None):
         """Add a url pattern.
 
         Args:
@@ -104,7 +104,7 @@ class Drongo(object):
         See Also:
             :func:`drongo.managers.url.UrlManager.add`
         """
-        self._url_manager.add(pattern, method, call)
+        self._url_manager.add(pattern, method, call, name)
 
     # Properties
     @property
