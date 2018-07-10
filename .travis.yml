@@ -17,6 +17,7 @@ install: "python setup.py install"
 script:
   - pip install -r requirements.txt
   - pip install git+https://github.com/drongo-platform/drongo-core.git
+  - pip install git+https://github.com/drongo-platform/drongo-core-modules.git
   - flake8 drongo
   - flake8 nest
   - py.test --cov
