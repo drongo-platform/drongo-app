@@ -12,7 +12,7 @@ class APIClient(object):
 
     def __init__(self, api_url):
         self.api_url = api_url
-        self.headers = {}
+        self.headers = {'connection': 'keep-alive'}
 
     def set_auth_token(self, token):
         if token is None:
@@ -72,3 +72,4 @@ class AppServer(object):
 
     def stop(self):
         self.nest.shutdown()
+        self.thread.join()
