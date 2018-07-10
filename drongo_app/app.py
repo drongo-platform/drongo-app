@@ -22,6 +22,7 @@ app = Drongo()
 def dummy(ctx):
     return ''
 
+
 app.add_url(pattern='/*', method='OPTIONS', call=dummy)
 
 app.add_middleware(CORSMiddleware())
