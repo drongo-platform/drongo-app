@@ -85,6 +85,11 @@ class SyncHandler(object):
             if env:
                 responder = Responder(sock, self.app)
                 responder.respond(env)
+                if 'HTTP_CONNECTION' not in env or \
+                        env['HTTP_CONNECTION'].lower() != 'keep-alive':
+                    sock.close()
+                    self._client_readers.pop(sock)
+                    self._clients.remove(sock)
         except (EOFError, socket.error):
             # TODO: Log the error
             sock.close()
