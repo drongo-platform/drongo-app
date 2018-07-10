@@ -8,9 +8,8 @@ from nest import Nest
 
 
 class APIClient(object):
-    http = urllib3.PoolManager()
-
     def __init__(self, api_url):
+        self.http = urllib3.PoolManager()
         self.api_url = api_url
         self.headers = {'connection': 'keep-alive'}
 
@@ -65,7 +64,7 @@ class AppServer(object):
         self.thread = None
 
     def run(self):
-        self.nest = Nest(app=self.app, port=12345, async=False)
+        self.nest = Nest(app=self.app, port=12345)
         self.thread = Thread(target=self.nest.run)
         self.thread.start()
         time.sleep(0.5)
