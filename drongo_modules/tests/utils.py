@@ -19,18 +19,25 @@ class APIClient(object):
         else:
             self.headers['Authorization'] = token
 
+    def request(self, *args, **kwargs):
+        while True:
+            try:
+                return self.http.request(*args, **kwargs)
+            except:
+                time.sleep(0.5)
+
     def get(self, url, params=None):
         url = self.api_url + url
         headers = {}
         headers.update(self.headers)
-        r = self.http.request('GET', url, params, headers=headers)
+        r = self.request('GET', url, params, headers=headers)
         return json.loads(r.data.decode('utf-8'))
 
     def post(self, url, payload):
         url = self.api_url + url
         headers = {'Content-Type': 'application/json'}
         headers.update(self.headers)
-        r = self.http.request(
+        r = self.request(
             'POST',
             url,
             body=json.dumps(payload).encode('utf-8'),
@@ -42,7 +49,7 @@ class APIClient(object):
         url = self.api_url + url
         headers = {'Content-Type': 'application/json'}
         headers.update(self.headers)
-        r = self.http.request(
+        r = self.request(
             'PUT',
             url,
             body=json.dumps(payload).encode('utf-8'),
@@ -54,7 +61,7 @@ class APIClient(object):
         url = self.api_url + url
         headers = {}
         headers.update(self.headers)
-        r = self.http.request('DELETE', url, headers=headers)
+        r = self.request('DELETE', url, headers=headers)
         return json.loads(r.data.decode('utf-8'))
 
 
