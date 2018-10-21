@@ -2,7 +2,7 @@ def evaluate(options, env):
     if isinstance(options, str):
         try:
             return options.format(**env)
-        except KeyError as e:
+        except KeyError:
             return None
 
     elif isinstance(options, dict):
